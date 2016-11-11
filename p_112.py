@@ -1,40 +1,42 @@
-from math import *
+# Project Euler Problem 112: Bouncy Numbers
+# Author: Kavin Subramanyam
+
+import time
 
 def is_increasing(n):
-	digits = int(log(n, 10))
-	prev = 0
-	for i in range(0, digits + 1):
-		d = n // (10 ** (digits - i))
-		n = n % (10 ** (digits - i))
-		if d < prev:
+	c = n % 10
+	while n > 0:
+		n = n//10
+		t = n % 10
+		if c < t:
 			return False
-		prev = d
+		c = t
 	return True
 
 def is_decreasing(n):
-	digits = int(log(n, 10))
-	prev = 9
-	for i in range(0, digits + 1):
-		d = n / (10 ** (digits - i))
-		n = n % (10 ** (digits - i))
-		if d > prev:
+	c = n % 10
+	while n > 10:
+		n = n//10
+		t = n % 10
+		if c > t:
 			return False
-		prev = d
+		c = t
 	return True
 
 def is_bouncy(n):
 	return not is_increasing(n) and not is_decreasing(n)
 
 if __name__ == '__main__':
-	T = 99
-	bouncy = 0
-	proportion = bouncy/T
-	# while proportion < 0.90:
-	# 	T += 1
-	# 	if is_bouncy(T):
-	# 		bouncy += 1
-	# 	proportion = bouncy/T
-	# 	if T % 10000 == 0:
-	# 		print("T: {}, proportion: {}".format(T, proportion))
-	# print(proportion)
-	# print(T)
+	begin = time.time()
+	target = 0.99
+	count = 0
+	proportion = 0
+	i = 0
+	while proportion < target:
+		i += 1
+		if is_bouncy(i):
+			count += 1
+		proportion = count/i
+	end = time.time()
+	print("Time taken:", end - begin)
+	print("Solution:", i)
