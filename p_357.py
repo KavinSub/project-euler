@@ -15,14 +15,6 @@ def memoize(func):
 			return result
 	return inner
 
-# For n >= 2
-# @memoize
-# def is_prime(n):
-# 	for i in range(2, int(sqrt(n)) + 1):
-# 		if n % i == 0:
-# 			return False
-# 	return True
-
 def sieve(n):
 	L = [True] * (n + 1)
 	L[0] = False
